@@ -1,5 +1,8 @@
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Rectangle;
+
+import javax.swing.ImageIcon;
 
 public class Sprite {
 
@@ -8,6 +11,8 @@ public class Sprite {
 	private int startXPos, startYPos;
 	private int xVelocity, yVelocity;
 	private Color colour;
+	private int speed = 1;
+	private Image image;
 	
 	public int getWidth() { return width; }
 	public int getHeight() { return height; }
@@ -17,7 +22,17 @@ public class Sprite {
 	public int getYVelocity() { return yVelocity; }
 	public Color getColour() { return colour; }
 	public Rectangle getRect() { return new Rectangle(xPos, yPos, width, height); }
+	public int getSpeed() { return speed; };
+	public Image getImage() { return image; };
 		
+	public void loadImage(String filename) {
+		ImageIcon imgicon = new ImageIcon("src/resources/" + filename);
+		image = imgicon.getImage();
+		
+		setWidth(image.getWidth(null));
+		setHeight(image.getHeight(null));
+	}
+	
 	public void setStartPos(int newXPos, int newYPos) {
 		startXPos = newXPos;
 		startYPos = newYPos;
@@ -81,4 +96,10 @@ public class Sprite {
 			yPos = panelHeight - getHeight();
 		}
 	}
+	
+	// Check if this sprite's Rectangle intersects with another sprite's Rectangle
+	public boolean intersects(Sprite sprite) {
+		return getRect().intersects(sprite.getRect());
+	}
+	
 }
