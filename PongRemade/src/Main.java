@@ -10,6 +10,8 @@ public class Main extends JFrame {
 		setSize(SCREEN_SIZE[0], SCREEN_SIZE[1]);
 		setResizable(false);
 		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		add(new GameScreen());
 	}
 	
 	public static void main(String[] args) {
