@@ -10,49 +10,49 @@ public class GameControls {
 	
 	public boolean downKeyPressed(KeyEvent event) {
 		for (int[] player : playerKeys) {
-			if (player[0] == event.getKeyCode()) { return true; }
+			if (player[1] == event.getKeyCode()) { return true; }
 		}
 		return false;
 	}
 	
 	public boolean downKeyPressed(KeyEvent event, int index) {
-		if (playerKeys[index][0] == event.getKeyCode()) { return true; }
+		if (playerKeys[index][1] == event.getKeyCode()) { return true; }
 		return false;
 	}
 	
 	public boolean upKeyPressed(KeyEvent event) {
-		for (int[] player : playerKeys) {
-			if (player[1] == event.getKeyCode()) { return true; }
-		}
-		return false;
-	}
-	
-	public boolean upKeyPressed(KeyEvent event, int index) {
-		if (playerKeys[index][1] == event.getKeyCode()) { return true; }
-		return false;
-	}
-
-	public boolean downKeyReleased(KeyEvent event) {
 		for (int[] player : playerKeys) {
 			if (player[0] == event.getKeyCode()) { return true; }
 		}
 		return false;
 	}
 	
-	public boolean downKeyReleased(KeyEvent event, int index) {
+	public boolean upKeyPressed(KeyEvent event, int index) {
 		if (playerKeys[index][0] == event.getKeyCode()) { return true; }
 		return false;
 	}
-	
-	public boolean upKeyReleased(KeyEvent event) {
+
+	public boolean downKeyReleased(KeyEvent event) {
 		for (int[] player : playerKeys) {
 			if (player[1] == event.getKeyCode()) { return true; }
 		}
 		return false;
 	}
 	
-	public boolean upKeyReleased(KeyEvent event, int index) {
+	public boolean downKeyReleased(KeyEvent event, int index) {
 		if (playerKeys[index][1] == event.getKeyCode()) { return true; }
+		return false;
+	}
+	
+	public boolean upKeyReleased(KeyEvent event) {
+		for (int[] player : playerKeys) {
+			if (player[0] == event.getKeyCode()) { return true; }
+		}
+		return false;
+	}
+	
+	public boolean upKeyReleased(KeyEvent event, int index) {
+		if (playerKeys[index][0] == event.getKeyCode()) { return true; }
 		return false;
 	}
 }

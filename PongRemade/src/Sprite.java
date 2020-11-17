@@ -55,6 +55,10 @@ public class Sprite {
 		yVelocity = (yVel);
 	}
 	
+	public void setSpeed(int newSpeed) {
+		speed = newSpeed;
+	}
+	
 	public int getTrueXVelocity() { 
 		return getXVelocity() + (getXVelocity() > 0 ? getSpeed() : -getSpeed()); 
 	}
@@ -108,6 +112,19 @@ public class Sprite {
 	public void move() {
 		setXPos(getXPos() + getTrueXVelocity());
 		setYPos(getYPos() + getTrueYVelocity());
+	}
+	
+	public void move(int panelWidth, int panelHeight) {
+		setXPos(getXPos() + getTrueXVelocity(), panelWidth);
+		setYPos(getYPos() + getTrueYVelocity(), panelHeight);
+	}
+	
+	public boolean atHorzEdge(int panelWidth) {
+		return (getXPos() <= 0 || getXPos() >= panelWidth - getWidth());
+	}
+	
+	public boolean atVertEdge(int panelHeight) {
+		return (getYPos() <= 0 || getYPos() >= panelHeight - getHeight());
 	}
 	
 	// Check if this sprite's Rectangle intersects with another sprite's Rectangle
