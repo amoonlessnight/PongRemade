@@ -1,4 +1,8 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -11,9 +15,11 @@ public class GameScreen extends JPanel implements ActionListener, KeyListener {
 
 	private final static Color BACKGROUND_COLOUR = Color.black;
 	private final static int TIMER_DELAY = 5;
+	private final static String BALL_IMAGE_FILENAME = "ballsprite2.png";
 	
 	GameControls gameControls = new GameControls();
-	GameState gameState = GameState.StartGame;
+	GameState gameState = GameState.Initialising;
+	Ball ball;
 	
 	public GameScreen() {
 		setBackground(BACKGROUND_COLOUR);
@@ -21,6 +27,39 @@ public class GameScreen extends JPanel implements ActionListener, KeyListener {
 		timer.start();
 		addKeyListener(this);
 		setFocusable(true);
+	}
+	
+	private void paintDottedLine(Graphics graphics) {
+		Graphics2D graphics2d = (Graphics2D)graphics.create();
+		Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] {9}, 0);
+		graphics2d.setStroke(dashed);
+		graphics2d.setPaint(Color.GRAY);
+		graphics2d.drawLine(getWidth() / 2,  0,  getWidth() / 2,  getHeight());
+		graphics2d.dispose();
+	}
+	
+	@Override
+	public void paintComponent(Graphics graphics) {
+		super.paintComponent(graphics);
+		paintDottedLine(graphics);
+		if (gameState != GameState.Initialising) {
+			paintObjects(graphics);
+		}
+	}
+	
+	public void paintObjects(Graphics graphics) {
+		paintSprite(graphics, ball);
+		//for (Paddle paddle : paddles) { paintSprite(graphics, paddle); }
+		//paintScores(graphics);
+	}
+	
+	public void paintSprite(Graphics graphics, Sprite sprite) {
+		
+	}
+	
+	public void paintSprite(Graphics graphics, Ball ball) {
+		Graphics2D g2d = (Graphics2D)graphics;
+		g2d.drawImage(ball.getImage(), ball.getXPos(), ball.getYPos(), this);
 	}
 	
 	@Override
@@ -47,10 +86,16 @@ public class GameScreen extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		update();
+		repaint();
 	}
 
 	public void update() {
-		
+		if (gameState == GameState.Initialising) {
+			ball = new Ball(BALL_IMAGE_FILENAME);
+			ball.setXPos(getWidth() / 2 - ball.getWidth() / 2, getWidth());
+			ball.setYPos(getHeight() / 2 - ball.getHeight() / 2, getHeight());
+			gameState = GameState.Playing;
+		}
 	}
 	
 }

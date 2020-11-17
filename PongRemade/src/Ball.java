@@ -16,4 +16,10 @@ public class Ball extends Sprite {
 	public Ball(String filename) {
 		loadImage(filename);
 	}
+	
+	public void move(int panelWidth, int panelHeight) {
+		setXPos(getXPos() + getTrueXVelocity(), panelWidth);
+		setYPos(getYPos() + getTrueYVelocity(), panelHeight);
+	}
+	
 }
