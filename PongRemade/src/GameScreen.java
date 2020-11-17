@@ -24,6 +24,8 @@ public class GameScreen extends JPanel implements ActionListener, KeyListener {
 	Ball ball;
 	Paddle[] paddles = new Paddle[2];
 	
+	int[] playerScores = new int[] {0,0};
+	
 	public GameScreen() {
 		setBackground(BACKGROUND_COLOUR);
 		Timer timer = new Timer(TIMER_DELAY, this);
@@ -85,14 +87,16 @@ public class GameScreen extends JPanel implements ActionListener, KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent event) {
-		checkPlayerKeyPress(event, Player.One);
-		checkPlayerKeyPress(event, Player.Two);
+		for (Player player : Player.values()) {
+			checkPlayerKeyPress(event, player);
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent event) {
-		checkPlayerKeyReleased(event, Player.One);
-		checkPlayerKeyReleased(event, Player.Two);
+		for (Player player : Player.values()) {
+			checkPlayerKeyReleased(event, player);
+		}
 	}
 
 	@Override
@@ -127,24 +131,31 @@ public class GameScreen extends JPanel implements ActionListener, KeyListener {
 	
 	public void checkWallBounce() {
 		if (ball.atHorzEdge(getWidth())) {
-			//addScore(ball.getXPos() == 0 ? Player.Two : Player.One);
+			addScore(ball.getXPos() == 0 ? Player.Two : Player.One);
 			ball.reverseXVelocity();
 			ball.resetStartPos();
 			ball.resetSpeed();
 		}
 		if (ball.atVertEdge(getHeight())) {
 			ball.reverseYVelocity();
+			GameAudio.playBounceSE();
 		}
+	}
+	
+	public void addScore(Player player) {
+		
 	}
 	
 	public void checkPaddleBounce() {
 		if (ball.getXVelocity() < 0 && ball.intersects(paddles[0])) {
 			ball.reverseXVelocity();
 			ball.increaseSpeed();
+			GameAudio.playPaddleSE();
 		}
 		if (ball.getXVelocity() > 0 && ball.intersects(paddles[1])) {
 			ball.reverseXVelocity();
 			ball.increaseSpeed();
+			GameAudio.playPaddleSE();
 		}
 	}
 }
