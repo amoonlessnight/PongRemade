@@ -29,7 +29,7 @@ public class Main extends JFrame {
         } catch (Exception e) {
             System.out.println("Cannot read file: " + e);
         }
-		BackgroundPanel background = new BackgroundPanel(img, BackgroundPanel.SCALED, 0.50f, 0.5f);
+		BackgroundPanel background = new BackgroundPanel(img);
         
         setContentPane(background); 
 	}
