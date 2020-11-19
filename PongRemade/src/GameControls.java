@@ -2,56 +2,66 @@ import java.awt.event.KeyEvent;
 
 public class GameControls {
 
-	private int[][] playerKeys = new int[][] { 
+	private static int[][] playerKeys = new int[][] { 
 		new int[] { KeyEvent.VK_W, KeyEvent.VK_S}, new int[] {KeyEvent.VK_UP, KeyEvent.VK_DOWN} 
 	};
-	private int pauseKey = KeyEvent.VK_SHIFT;
-	private int exitKey = KeyEvent.VK_ESCAPE;
+	private static int pauseKey = KeyEvent.VK_SHIFT;
+	private static int exitKey = KeyEvent.VK_ESCAPE;
 	
-	public boolean downKeyPressed(KeyEvent event) {
+	public static boolean pauseKeyPressed(KeyEvent event) {
+		if (pauseKey == event.getKeyCode()) { return true; }
+		return false;
+	}
+	
+	public static boolean exitKeyPressed(KeyEvent event) {
+		if (exitKey == event.getKeyCode()) { return true; }
+		return false;
+	}
+	
+	public static boolean downKeyPressed(KeyEvent event) {
 		for (int[] player : playerKeys) {
 			if (player[1] == event.getKeyCode()) { return true; }
 		}
 		return false;
 	}
 	
-	public boolean downKeyPressed(KeyEvent event, int index) {
+	public static boolean downKeyPressed(KeyEvent event, int index) {
 		if (playerKeys[index][1] == event.getKeyCode()) { return true; }
 		return false;
 	}
 	
-	public boolean upKeyPressed(KeyEvent event) {
+	public static boolean upKeyPressed(KeyEvent event) {
 		for (int[] player : playerKeys) {
 			if (player[0] == event.getKeyCode()) { return true; }
 		}
 		return false;
 	}
 	
-	public boolean upKeyPressed(KeyEvent event, int index) {
+	public static boolean upKeyPressed(KeyEvent event, int index) {
 		if (playerKeys[index][0] == event.getKeyCode()) { return true; }
 		return false;
 	}
 
-	public boolean downKeyReleased(KeyEvent event) {
+	public static boolean downKeyReleased(KeyEvent event) {
 		for (int[] player : playerKeys) {
 			if (player[1] == event.getKeyCode()) { return true; }
 		}
 		return false;
 	}
 	
-	public boolean downKeyReleased(KeyEvent event, int index) {
+	public static boolean downKeyReleased(KeyEvent event, int index) {
 		if (playerKeys[index][1] == event.getKeyCode()) { return true; }
 		return false;
 	}
 	
-	public boolean upKeyReleased(KeyEvent event) {
+	public static boolean upKeyReleased(KeyEvent event) {
 		for (int[] player : playerKeys) {
 			if (player[0] == event.getKeyCode()) { return true; }
 		}
 		return false;
 	}
 	
-	public boolean upKeyReleased(KeyEvent event, int index) {
+	public static boolean upKeyReleased(KeyEvent event, int index) {
 		if (playerKeys[index][0] == event.getKeyCode()) { return true; }
 		return false;
 	}

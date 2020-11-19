@@ -4,6 +4,15 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
+//wait for a key press before starting the game
+//ability to restart the game once it has been won
+//function to pause the game
+//replacing the blocky objects with images
+//using a font that better matches the style of the game
+//adding a title screen with the option to start game or quit the application
+//differing levels of difficulty
+//powerups that increases the paddle size or speeds up the ball.
+
 public class Main extends JFrame {
 
 	private static final String BACKGROUND_FILE = "./src/resources/background3.png";
