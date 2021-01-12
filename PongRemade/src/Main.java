@@ -29,6 +29,7 @@ public class Main extends JFrame {
 		add(new GameScreen());
 	}
 	
+	// Create Background for the screen from image file
 	public void createBackground() {
 		BufferedImage img = null;
         try {
